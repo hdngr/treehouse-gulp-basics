@@ -17,5 +17,3 @@ $('.main-heading').on('sticky-end', function () {
     border: 'none'
   });
 });
-
-var foobar = yay;
