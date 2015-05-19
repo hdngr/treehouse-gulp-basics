@@ -10536,3 +10536,6 @@ $('.main-heading').on('sticky-end', function () {
     border: 'none'
   });
 });
+
+var foo = bar;
+//# sourceMappingURL=app.js.map
