@@ -19,7 +19,7 @@ gulp.task("concatScripts", function() {
     .pipe(gulp.dest('js'));
 });
 
-gulp.task("minifyScripts", function() {
+gulp.task("minifyScripts", ["concatScripts"], function() {
 	gulp.src("js/app.js")
 		.pipe(uglify())
 		.pipe(rename('app.min.js'))
@@ -34,6 +34,6 @@ gulp.task('compileSass', function() {
       .pipe(gulp.dest('css'));
 })
 
-gulp.task("default", ["hello"], function() {
-    console.log("the default task!!!!");
-});
+gulp.task("build", ['minifyScripts', 'compileSass']);
+
+gulp.task("default", ["build"]);

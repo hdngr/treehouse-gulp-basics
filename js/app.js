@@ -10537,5 +10537,6 @@ $('.main-heading').on('sticky-end', function () {
   });
 });
 
-var foo = bar;
+console.log("I am the new main.js file!")
+
 //# sourceMappingURL=app.js.map
