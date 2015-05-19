@@ -7,16 +7,17 @@ body {
   line-height: 1.5;
   color: #878787;
   margin: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-h1, h2 {
-  font-family: 'Abolition Regular', Helvetica, Arial, sans-serif; }
+h1,
+h2 {
+  font-family: "Abolition Regular", Helvetica, Arial, sans-serif; }
 
 h2 {
   font-size: 3.3125em;
   line-height: 1.1;
   font-weight: normal;
-  margin: 0 0 .5em; }
+  margin: 0 0 0.5em; }
 
 h3 {
   font-size: 1.25em;
@@ -29,7 +30,8 @@ img {
   margin-bottom: 20px;
   border-radius: 10px; }
 
-ul, ol {
+ul,
+ol {
   margin: 30px 0; }
 
 li {
@@ -39,15 +41,17 @@ li {
 a:link {
   color: #ffa949;
   text-decoration: none; }
+
 a:visited {
   color: #add8e6; }
+
 a:hover {
   color: rgba(255, 169, 73, 0.5); }
 
 .main-header {
   padding-top: 170px;
   height: 850px;
-  background: linear-gradient(#ffa949, transparent 90%), linear-gradient(0deg, #fff, transparent), #ffa949 url('../img/mountains.jpg') no-repeat center;
+  background: linear-gradient(#ffa949, transparent 90%), linear-gradient(0deg, #fff, transparent), #ffa949 url("../img/mountains.jpg") no-repeat center;
   background-size: cover; }
   @media (max-width: 768px) {
     .main-header {
@@ -77,7 +81,7 @@ a:hover {
   padding: 18% 24%;
   border-top: 10px solid #ffa949;
   margin: 105px 0 60px;
-  background: #48525c url('../img/bear.jpg') no-repeat center;
+  background: #48525c url("../img/bear.jpg") no-repeat center;
   background-size: cover;
   box-shadow: inset 0 0 50px 10px rgba(0, 0, 0, 0.8);
   border-radius: 10px; }
@@ -127,9 +131,9 @@ a:hover {
 
 /* Web Fonts -------------------- */
 @font-face {
-  font-family: 'Abolition Regular';
-  src: url('../fonts/abolition-regular-webfont.eot');
-  src: url('../fonts/abolition-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/abolition-regular-webfont.woff') format('woff'), url('../fonts/abolition-regular-webfont.ttf') format('truetype'); }
+  font-family: "Abolition Regular";
+  src: url("../fonts/abolition-regular-webfont.eot");
+  src: url("../fonts/abolition-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/abolition-regular-webfont.woff") format("woff"), url("../fonts/abolition-regular-webfont.ttf") format("truetype"); }
 
 .main-heading {
   font-size: 5.625rem;
@@ -143,6 +147,7 @@ a:hover {
     .main-heading {
       font-size: 5rem;
       line-height: 1.1; } }
+
 .main-title {
   font-size: 1.625rem;
   font-weight: 200;
@@ -176,6 +181,5 @@ a:hover {
   @media (max-width: 768px) {
     .arrow {
       display: none; } }
-
 
 /*# sourceMappingURL=application.css.map */
