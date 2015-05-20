@@ -24,16 +24,25 @@ gulp.task('uglifyScripts', function() {
 });
 
 gulp.task('compileSass', function() {
-  return gulp.src('./scss/application.scss')
-    .pipe(maps.init())
-    .pipe(sass())
-    .pipe(maps.write('./'))
-    .pipe(gulp.dest('./css/'));
+  return gulp.src("scss/application.scss")
+      .pipe(maps.init())
+      .pipe(sass())
+      .pipe(maps.write('./'))
+      .pipe(gulp.dest('css'));
 });
 
-// watch scripts
-gulp.task('serve', function() {
-  gulp.watch('./js/main.js', ['concatScripts', 'uglifyScripts']);
+gulp.task('watchFiles', function() {
+  gulp.watch('scss/**/*.scss', ['compileSass']);
+  gulp.watch('js/main.js', ['concatScripts']);
+})
+
+gulp.task('clean', function() {
+  del(['dist', 'css/application.css*', 'js/app*.js*']);
 });
 
-gulp.task('default', ['hello']);
+gulp.task('serve', ['watchFiles']);
+
+gulp.task("default", ["clean"], function() {
+  gulp.start('build');
+});
+
