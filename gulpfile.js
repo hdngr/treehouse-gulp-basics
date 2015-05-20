@@ -40,6 +40,12 @@ gulp.task('clean', function() {
   del(['dist', 'css/application.css*', 'js/app*.js*']);
 });
 
+gulp.task("build", ['minifyScripts', 'compileSass'], function() {
+  return gulp.src(["css/application.css", "js/app.min.js", 'index.html',
+                   "img/**", "fonts/**"], { base: './'})
+            .pipe(gulp.dest('dist'));
+
+
 gulp.task('serve', ['watchFiles']);
 
 gulp.task("default", ["clean"], function() {
