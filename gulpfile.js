@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     maps = require('gulp-sourcemaps');
 
 gulp.task("concatScripts", function() {
-    gulp.src([
+    return gulp.src([
         'js/jquery.js',
         'js/sticky/jquery.sticky.js',
         'js/main.js'
@@ -20,14 +20,14 @@ gulp.task("concatScripts", function() {
 });
 
 gulp.task("minifyScripts", ["concatScripts"], function() {
-	gulp.src("js/app.js")
-		.pipe(uglify())
-		.pipe(rename('app.min.js'))
-		.pipe(gulp.dest('js'));
+  return gulp.src("js/app.js")
+    .pipe(uglify())
+    .pipe(rename('app.min.js'))
+    .pipe(gulp.dest('js'));
 });
 
 gulp.task('compileSass', function() {
-  gulp.src("scss/application.scss")
+  return gulp.src("scss/application.scss")
       .pipe(maps.init())
       .pipe(sass())
       .pipe(maps.write('./'))
