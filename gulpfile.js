@@ -1,50 +1,52 @@
 'use strict';
 
 var gulp = require('gulp'),
-  concat = require('gulp-concat'),
   uglify = require('gulp-uglify'),
   rename = require('gulp-rename'),
     sass = require('gulp-sass'),
-    maps = require('gulp-sourcemaps');
+    maps = require('gulp-sourcemaps'),
+  useref = require('gulp-useref'),
+     iff = require('gulp-if'),
+    csso = require('gulp-csso'),
+     del = require('del');
 
-gulp.task('concatScripts', function() {
-  return gulp.src(['./js/jquery.js', './js/sticky/jquery.sticky.js', './js/main.js'])
-   .pipe(maps.init())
-    .pipe(concat('app.js'))
-   .pipe(maps.write('./'))
-    .pipe(gulp.dest('./js'));
-});
-
-gulp.task('uglifyScripts', function() {
-  return gulp.src('./js/app.js')
-    .pipe(rename('app.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./js'))
-    .on('error', console.log);
-});
+var options = {
+  src: 'src',
+  dist: 'dist'
+};
 
 gulp.task('compileSass', function() {
-  return gulp.src("scss/application.scss")
+  return gulp.src(options.src + "/scss/application.scss")
       .pipe(maps.init())
       .pipe(sass())
       .pipe(maps.write('./'))
-      .pipe(gulp.dest('css'));
+      .pipe(gulp.dest(options.src + '/css'));
 });
 
 gulp.task('watchFiles', function() {
-  gulp.watch('scss/**/*.scss', ['compileSass']);
-  gulp.watch('js/main.js', ['concatScripts']);
+  gulp.watch(options.src + '/scss/**/*.scss', ['compileSass']);
 })
 
 gulp.task('clean', function() {
-  del(['dist', 'css/application.css*', 'js/app*.js*']);
+  del(['dist', options.src + '/css/application.css*']);
 });
 
-gulp.task("build", ['minifyScripts', 'compileSass'], function() {
-  return gulp.src(["css/application.css", "js/app.min.js", 'index.html',
-                   "img/**", "fonts/**"], { base: './'})
-            .pipe(gulp.dest('dist'));
 
+gulp.task('html', ['compileSass'], function() {
+  var assets = useref.assets();
+  gulp.src(options.src + '/index.html')
+      .pipe(assets)
+      .pipe(iff('*.js', uglify()))
+      .pipe(iff('*.css', csso()))
+      .pipe(assets.restore())
+      .pipe(useref())
+      .pipe(gulp.dest(options.dist));
+});
+
+gulp.task("build", ['html'], function() {
+  return gulp.src([options.src + "/img/**", options.src + "/fonts/**"], { base: options.src})
+            .pipe(gulp.dest(options.dist));
+});
 
 gulp.task('serve', ['watchFiles']);
 
