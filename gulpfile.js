@@ -6,6 +6,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     maps = require('gulp-sourcemaps'),
   useref = require('gulp-useref'),
+     iff = require('gulp-if'),
+    csso = require('gulp-csso'),
      del = require('del');
 
 var options = {
@@ -34,13 +36,14 @@ gulp.task('html', ['compileSass'], function() {
   var assets = useref.assets();
   gulp.src(options.src + '/index.html')
       .pipe(assets)
-      .pipe(uglify())
+      .pipe(iff('*.js', uglify()))
+      .pipe(iff('*.css', csso()))
       .pipe(assets.restore())
       .pipe(useref())
       .pipe(gulp.dest(options.dist));
 });
 
-gulp.task("build", function() {
+gulp.task("build", ['html'], function() {
   return gulp.src([options.src + "/img/**", options.src + "/fonts/**"], { base: options.src})
             .pipe(gulp.dest(options.dist));
 });
